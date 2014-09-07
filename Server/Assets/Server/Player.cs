@@ -12,6 +12,30 @@ public class Player : MonoBehaviour {
 	private string myIp = "127.0.0.1";
 	// Use this for initialization
 
+	void  OnSerializeNetworkView ( BitStream stream ,   NetworkMessageInfo info  ){
+		
+		if (stream.isWriting) {
+			Vector3 pos = new Vector3();
+			Vector3 sca = new Vector3();
+			pos = transform.position;
+			sca = transform.localScale;
+			stream.Serialize (ref pos);
+			stream.Serialize (ref sca);
+		} else if (stream.isReading){
+			// Receiving
+			Vector3 pos = new Vector3();
+			Vector3 sca = new Vector3();
+			stream.Serialize(ref pos);
+			transform.position = pos;
+			stream.Serialize (ref sca);
+			transform.localScale = sca;
+		}
+	}
+
+
+
+
+
 	void Awake(){
 		instance = this;
 	}

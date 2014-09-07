@@ -30,6 +30,21 @@ public class GameState : MonoBehaviour {
 	public int[] voteCountOnSide = {0,0,0};
 
 
+	
+	void  OnSerializeNetworkView ( BitStream stream ,   NetworkMessageInfo info  ){
+		
+		if (stream.isWriting) {
+			Vector3 pos = new Vector3();
+			pos = transform.position;
+			stream.Serialize (ref pos);
+		} else {
+			// Receiving
+			Vector3 pos = new Vector3();
+			stream.Serialize(ref pos);
+			transform.position = pos;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 

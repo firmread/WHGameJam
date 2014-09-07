@@ -33,7 +33,7 @@ public class Client : MonoBehaviour {
 		if (Network.peerType == NetworkPeerType.Disconnected){  
 			GUILayout.Label("Disconnected");
 
-			GUILayout.Space(100);
+			GUILayout.Space(40);
 			GUILayout.BeginHorizontal ();
 			serverIpAddress = GUILayout.TextField (serverIpAddress);
 			GUILayout.Label ("IP Address");
@@ -45,7 +45,8 @@ public class Client : MonoBehaviour {
 //			serverPort = int.Parse(tempPort);
 //			GUILayout.Label ("Port");
 //			GUILayout.EndHorizontal();
-			
+			GUILayout.Label ("port: " + serverPort.ToString());
+
 			if(GUILayout.Button ("Connect")) {
 				ConnectToServer();
 			}
@@ -72,8 +73,17 @@ public class Client : MonoBehaviour {
 				DisconnectToServer();
 			if (GUILayout.Button("testInt ++"))
 				networkView.RPC("AddTestInt", RPCMode.Server);
-			
-			
+
+			GUILayout.Space(40);
+			if (GUILayout.Button("testNetwork ++"))
+				Player.instance.role ++;
+
+//				networkView.RPC("AddTestInt", RPCMode.Server);
+			GameObject go = GameObject.Find("player1");
+			Player other = (Player) go.GetComponent(typeof(Player));
+//			other.DoSomething();
+			GUILayout.Label("local P1 role = " + other.role);
+
 		}
 	}
 

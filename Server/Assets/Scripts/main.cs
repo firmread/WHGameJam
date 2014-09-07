@@ -17,6 +17,7 @@ public class main : MonoBehaviour {
 	void  StopServer (){
 		Network.Disconnect();
 	}
+
 	void  OnGUI (){
 
 	 	if (Network.peerType == NetworkPeerType.Disconnected) {
@@ -48,6 +49,10 @@ public class main : MonoBehaviour {
 	        if (GUILayout.Button ("Stop Server")){				
 				StopServer();	
 			}
+			
+			GameObject go = GameObject.Find("player1");
+			Player other = (Player) go.GetComponent(typeof(Player));
+			GUILayout.Label("local P1 role = " + other.role);
 	    }
 	}
 
