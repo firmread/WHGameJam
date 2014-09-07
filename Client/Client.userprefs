@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Client.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Client.cs">
     <Files>
-      <File FileName="Assets/Scripts/Client.js" Line="71" Column="17" />
-      <File FileName="Assets/Server/Player.js" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Client.cs" Line="113" Column="3" />
+      <File FileName="Assets/Server/GameState.cs" Line="28" Column="42" />
+      <File FileName="Assets/Server/Player.cs" Line="81" Column="1" />
+      <File FileName="Assets/Scripts/myRole.cs" Line="27" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
