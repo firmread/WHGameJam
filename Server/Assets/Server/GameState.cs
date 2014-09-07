@@ -32,7 +32,7 @@ public class GameState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 
@@ -44,8 +44,11 @@ public class GameState : MonoBehaviour {
 			networkView.RPC ("changeState", RPCMode.AllBuffered, currentGameState);
 		}
 
+		transform.position = new Vector3 (currentGameState, 0, 0);
 
 		//where we are
+
+		// all connected, still at first game state, everyone is ready
 		if (Network.connections.Length == maxConnections && 
 		    currentGameState == 0 && 
 		    bAllInited()) 
@@ -76,9 +79,6 @@ public class GameState : MonoBehaviour {
 
 	}
 
-	[RPC]
-	void changeState(int currentGameState){
-	}
 	
 	[RPC]
 	void AssignRole ( string ip, int _role){
@@ -91,7 +91,7 @@ public class GameState : MonoBehaviour {
 	bool bAllInited (){
 		bool bCheck = true;
 		for (int i = 0; i < players.Length; i ++) {
-			if (!players[i].bInited) bCheck = false;
+			if (players[i].pState < 1) bCheck = false;
 		}
 		if (bCheck) return true; 
 		else return false;

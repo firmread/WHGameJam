@@ -7,11 +7,7 @@ public class Player : MonoBehaviour {
 	public int role;
 	public int pVC;
 	public int pPoint;
-	public bool bInited = false;
-	public bool bHWDone = false;
-	public bool bSpeechDone = false;
-	public bool bDealDone = false;
-	public bool bVoteDone = false;
+	public int pState = 0;
 
 	private string myIp = "127.0.0.1";
 	// Use this for initialization
@@ -26,24 +22,26 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-//		Network.
 
-		if (!bInited) {
+		transform.localPosition = new Vector3 (role, pVC, pPoint);
+		transform.localScale = new Vector3 (pState, 0, 0);
+
+
+		//preGame
+		if (pState > 1) {
 			myIp = Network.player.ipAddress;
 			if(myIp != "127.0.0.1") {
-				bInited = true;
-
+				pState = 1;
 			}
 		} 
-		else if (!bHWDone){
+		else if (pState == 1){
 
 		}
 	}
 
-	
 	//preGame
-
-
+		
+		
 	//hwBaseScreen
 	[RPC]
 	void PlayerVCMul ( float mul ){
@@ -60,17 +58,17 @@ public class Player : MonoBehaviour {
 	//pointDisplay
 
 
-	void updateMyPlayerData(){
-		networkView.RPC("syncPlayerData", RPCMode.AllBuffered,
-		                role, pVC, pPoint, bInited, bHWDone, bSpeechDone, bDealDone, bVoteDone );
-	}
+//	void updateMyPlayerData(){
+//		networkView.RPC("syncPlayerData", RPCMode.AllBuffered,
+//		                role, pVC, pPoint, bInited, bHWDone, bSpeechDone, bDealDone, bVoteDone );
+//	}
 
-	[RPC] 
-	void syncPlayerData(int role, int pVC, int pPoint,
-	                    bool bInited, bool bHWDone, bool bSpeechDone, bool bDealDone, bool bVoteDone){
-		
-
-	}
+//	[RPC] 
+//	void syncPlayerData(int role, int pVC, int pPoint,
+//	                    bool bInited, bool bHWDone, bool bSpeechDone, bool bDealDone, bool bVoteDone){
+//		
+//
+//	}
 
 
 
