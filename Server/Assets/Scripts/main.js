@@ -1,28 +1,21 @@
 ﻿#pragma strict
 
-/* Server port address */
 var portNumber = 27001;
-/* Maximun numbers of client */
-var maxConnections = 10;
-var testInt =0;
-/**
- * This function will start game server
- */
-function StartServer(){
-	Network.InitializeServer(maxConnections, portNumber, false);
-}
+var maxConnections = 5;
 
-/**
- * This function will stop game server
- */
-function StopServer(){
+var testInt = 0;
+
+// Use this for initialization
+function StartServer()
+{
+	Network.InitializeServer (maxConnections,portNumber,false);
+}
+function StopServer()
+{
 	Network.Disconnect();
 }
-
-/**
- * OnGUI is called for rendering and handling GUI events.
- */
-function OnGUI (){
+function OnGUI()
+{
 
  	if (Network.peerType == NetworkPeerType.Disconnected) {
  		/* Server is not started */
@@ -31,7 +24,8 @@ function OnGUI (){
         if (GUILayout.Button("Start Game Server")) {				
 			StartServer();	
 		}
-    } else {
+    } 
+    else {
     	/* Server is started */
     	
     	if (Network.peerType == NetworkPeerType.Connecting) {
@@ -56,31 +50,27 @@ function OnGUI (){
 }
 
 
+
 @RPC
 function AddTestInt(){
 	testInt++;
 }
 
+
+
+
 @script RequireComponent(Manager)
 
 private var manager : Manager;
 
-/**
- * Awake is called when the script instance is being loaded.
- */
-function Awake() {
+function Awake(){
     manager = gameObject.GetComponent(Manager);
 }
-/**
- * Called on the server whenever a new player has successfully connected.
- */ 
+
 function OnPlayerConnected(aPlayer: NetworkPlayer) { 
     manager.NewPlayer(aPlayer);
 }
 
-/**
- * Called on the server whenever a player disconnected from the server.
- */ 
 function OnPlayerDisconnected(aPlayer : NetworkPlayer) {
     manager.DeletePlayer(aPlayer);
 }
